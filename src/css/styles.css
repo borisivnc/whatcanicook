@@ -11,3 +11,26 @@
 .navbar-brand{
     margin-left: 1rem;
 }
+
+.search-bar{
+    display: flex;
+  justify-content: space-between;
+}
+
+.second-navbar{
+    background-color: #e3e3e3;
+    border-top: 1px solid black;
+    justify-content: center;
+}
+
+#nav-dropdown{
+    color: black; 
+}
+
+#nav-dropdown::after{
+    display: none;
+}
+
+#nav-dropdown:hover{
+    background-color:#d6d6d6;
+}

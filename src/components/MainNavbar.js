@@ -1,32 +1,32 @@
-import React, {useState} from 'react'
+import React from 'react'
 import logo from '../assets/logo.png'
 import '../css/styles.css'
-import {Navbar, Form, Button, FormControl} from 'react-bootstrap'
+import {Navbar, Form, Button, FormControl, Col} from 'react-bootstrap'
 
 const MainNavbar = () => {
 
     return(
-        <div>
-            <Navbar className="navbar">
+        <>
+            <Navbar className="navbar justify-content-between">
                 <Navbar.Brand href="/">
-                    <img
-                        alt="logo"
-                        src={logo}
-                        width="50"
-                        height="50"
-                        className="d-inline-block"
-                    />{' '}
-                    <span className="title">What can I cook</span>
+                <img
+                    alt="logo"
+                    src={logo}
+                    width="50"
+                    height="50"
+                    className="d-inline-block"
+                />{' '}
+                <span className="title">WHAT CAN I COOK</span>
                 </Navbar.Brand>
-                <Form inline className="">
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-primary">Search</Button>
-                </Form>
-                
+                <Col sm="5">
+                    <Form className="search-bar">
+                    <FormControl type="text" placeholder="Ingredient, dish, keyword.." className="sm-2" />
+                    <Button variant="success">Search</Button>
+                    </Form>
+                </Col>
             </Navbar>
             
-            
-        </div>
+        </>
     )
 }
 

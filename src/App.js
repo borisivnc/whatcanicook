@@ -6,14 +6,16 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
 import MainNavbar from './components/MainNavbar'
+import SecondNavbar from './components/SecondNavbar'
 import Recipe from './components/Recipe'
+import Home from './components/Home'
 
 function App() {
   return (
     <div className="App">
       <MainNavbar/>
+      <SecondNavbar/>
       <Router>
         <div>
           <Switch>
@@ -21,6 +23,7 @@ function App() {
               <Recipe/>
             </Route>
             <Route exact path="/">
+              <Home/>
             </Route>
           </Switch>
         </div>
@@ -30,3 +33,4 @@ function App() {
 }
 
 export default App;
+
