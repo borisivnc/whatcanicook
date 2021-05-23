@@ -8,21 +8,23 @@ import {
 import MainNavbar from './components/MainNavbar'
 import SecondNavbar from './components/SecondNavbar'
 import Recipe from './components/Recipe'
-import Home from './components/Home'
+import Search from './components/Search'
 
 function App() {
   return (
     <div className="App">
-      <MainNavbar/>
-      <SecondNavbar/>
       <Router>
         <div>
+          <MainNavbar/>
+          <SecondNavbar/>
           <Switch>
             <Route path="/recipe/:id">
               <Recipe/>
             </Route>
+            <Route path="/search">
+              <Search/>
+            </Route>
             <Route exact path="/">
-              <Home/>
             </Route>
           </Switch>
         </div>
