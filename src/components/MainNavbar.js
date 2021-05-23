@@ -2,8 +2,22 @@ import React from 'react'
 import logo from '../assets/logo.png'
 import '../css/styles.css'
 import {Navbar, Form, Button, FormControl, Col} from 'react-bootstrap'
+import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 
 const MainNavbar = () => {
+
+    const history = useHistory();
+    const [searchQuery, setSearchQuery] = useState('')
+
+    function handleSearch() {
+        console.log(history)
+        // history.push("/search?query=" + searchQuery);
+        history.push({
+            pathname: '/search',
+            search: '?query=' + searchQuery
+        })
+    }
 
     return(
         <>
@@ -20,8 +34,14 @@ const MainNavbar = () => {
                 </Navbar.Brand>
                 <Col sm="5">
                     <Form className="search-bar">
-                    <FormControl type="text" placeholder="Ingredient, dish, keyword.." className="sm-2" />
-                    <Button variant="success">Search</Button>
+                    <FormControl
+                    type="text"
+                    placeholder="Ingredient, dish, keyword.."
+                    className="sm-2"
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    />
+                    <Button onClick={handleSearch} variant="success">Search</Button>
                     </Form>
                 </Col>
             </Navbar>
