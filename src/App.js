@@ -10,6 +10,8 @@ import SecondNavbar from './components/SecondNavbar'
 import Recipe from './components/Recipe'
 import Search from './components/Search'
 import Home from './components/Home'
+import Footer from './components/Footer'
+import Category from './components/Category'
 
 
 function App() {
@@ -26,10 +28,14 @@ function App() {
             <Route path="/search">
               <Search/>
             </Route>
+            <Route path="/recipes/category/:type/:name">
+              <Category/>
+            </Route>
             <Route exact path="/">
               <Home/>
             </Route>
           </Switch>
+          <Footer/>
         </div>
       </Router>
     </div>

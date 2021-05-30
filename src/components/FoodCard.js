@@ -12,9 +12,9 @@ const FoodCard = (props) => {
 
     return(
         <>
-        <Card className="text-white" onClick={goToRecipe} style={{cursor: 'pointer', background: 'linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)'}}>
+        <Card className="text-white" onClick={goToRecipe} style={{cursor: 'pointer'}}>
             <Card.Img src={props.img}/>
-                <Card.ImgOverlay>
+                <Card.ImgOverlay style={{background: 'rgba(0,0,0,.3)'}}>
                     <Card.Title className="text-wrap font-weight-medium">{props.title}</Card.Title>
                 </Card.ImgOverlay>
         </Card>
