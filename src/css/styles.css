@@ -40,3 +40,12 @@
     height: 100%;
     width: 95%;
 }
+
+.recipe-card {
+    padding: 10px;
+    margin: 20px 0px 20px;
+}
+
+.filters-card {
+    background-color: white !important;
+}

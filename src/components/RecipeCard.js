@@ -1,25 +1,32 @@
 import React from 'react'
 import '../css/styles.css'
-import {Button, Card} from 'react-bootstrap'
+import {Button, Card, Row, Col} from 'react-bootstrap'
+import { useHistory } from 'react-router'
 
 const RecipeCard = (props) => {
 
+    const history = useHistory()
+
     function goToURL(url) {
         console.log(url)
+        history.push(url)
     }
 
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={props.src} />
-            <Card.Body>
-                <Card.Title>{props.title}</Card.Title>
-                <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                </Card.Text>
-                <Button variant="primary" onClick={() => goToURL(props.to)}>Go somewhere</Button>
-            </Card.Body>
-        </Card>
+        <a style={{ cursor: 'pointer' }} onClick={() => goToURL(props.url)}>
+            <Card className="recipe-card">
+                <Row>
+                    <Col sm={5}>
+                        <Card.Img variant="top" src={props.src} />
+                    </Col>
+                    <Col sm={7}>
+                        <Card.Body>
+                            <Card.Title>{props.title}</Card.Title>
+                        </Card.Body>
+                    </Col>
+                </Row>
+            </Card>
+        </a>
     )
 }
 

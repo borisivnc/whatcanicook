@@ -47,6 +47,7 @@ const Recipe = () => {
 
     return (
         <div className="container">
+        <div style={{height: '30px'}}></div>
         <Card style={blackBg} text='white' className="justify-center">
             <Card.Body>
                 <Card.Title>{state.title}</Card.Title>
