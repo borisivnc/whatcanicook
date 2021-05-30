@@ -9,6 +9,8 @@ import MainNavbar from './components/MainNavbar'
 import SecondNavbar from './components/SecondNavbar'
 import Recipe from './components/Recipe'
 import Search from './components/Search'
+import Home from './components/Home'
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
               <Search/>
             </Route>
             <Route exact path="/">
+              <Home/>
             </Route>
           </Switch>
         </div>
