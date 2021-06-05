@@ -44,6 +44,7 @@ const MainNavbar = () => {
                     <Button onClick={handleSearch} variant="success">Search</Button>
                     </Form>
                 </Col>
+                <Button variant="link" href="/login" style={{color:'black'}}><i class="fas fa-user fa-lg"></i></Button>
             </Navbar>
             
         </>

@@ -12,32 +12,37 @@ import Search from './components/Search'
 import Home from './components/Home'
 import Footer from './components/Footer'
 import Category from './components/Category'
+import Login from './components/Login'
 
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <div>
-          <MainNavbar/>
-          <SecondNavbar/>
-          <Switch>
-            <Route path="/recipe/:id">
-              <Recipe/>
-            </Route>
-            <Route path="/search">
-              <Search/>
-            </Route>
-            <Route path="/recipes/category/:type/:name">
-              <Category/>
-            </Route>
-            <Route exact path="/">
-              <Home/>
-            </Route>
-          </Switch>
-          <Footer/>
-        </div>
-      </Router>
+      <div className="pageContainer">
+        <Router>
+          
+            <MainNavbar/>
+            <SecondNavbar/>
+            <Switch>
+              <Route path="/recipe/:id">
+                <Recipe/>
+              </Route>
+              <Route path="/login">
+                <Login/>
+              </Route>
+              <Route path="/search">
+                <Search/>
+              </Route>
+              <Route path="/recipes/category/:type/:name">
+                <Category/>
+              </Route>
+              <Route exact path="/">
+                <Home/>
+              </Route>
+            </Switch>
+        </Router>
+      </div>
+      <Footer/>
     </div>
   );
 }
