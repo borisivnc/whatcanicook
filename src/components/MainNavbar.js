@@ -3,16 +3,37 @@ import logo from '../assets/logo.png'
 import '../css/styles.css'
 import {Navbar, Form, Button, FormControl, Col} from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const MainNavbar = () => {
 
     const history = useHistory();
     const [searchQuery, setSearchQuery] = useState('')
 
+    const [user, setUser] = useState([])
+
+
+    useEffect(() => {
+        if (localStorage.getItem('user') != null)
+        {
+            setUser(JSON.parse(localStorage.getItem('user')))
+        }
+        else {
+            setUser([])
+        }
+
+    }, [user])
+
+    const user_logout = (e) => {
+        e.preventDefault()
+        localStorage.removeItem('user')
+        history.push({
+            pathname: "/login",
+        });
+    }
+
     function handleSearch() {
         console.log(history)
-        // history.push("/search?query=" + searchQuery);
         history.push({
             pathname: '/search',
             search: '?query=' + searchQuery
@@ -44,7 +65,17 @@ const MainNavbar = () => {
                     <Button onClick={handleSearch} variant="success">Search</Button>
                     </Form>
                 </Col>
-                <Button variant="link" href="/login" style={{color:'black'}}><i className="fas fa-user fa-lg"></i></Button>
+                {user.length !== 0 ?
+                [
+                    <Col sm="2" className="text-right">
+                        <Button variant="link" href="/dashboard" style={{color:'black'}}><i className="far fa-user-circle fa-lg"></i></Button>
+                        <Button variant="link" style={{color:'black'}} onClick={user_logout}><i className="fas fa-sign-out-alt fa-lg"></i></Button>
+                    </Col>
+                ]
+                
+                :
+                    <Button variant="link" href="/login" style={{color:'black'}}><i className="fas fa-user fa-lg"></i></Button>
+                }
             </Navbar>
             
         </>
