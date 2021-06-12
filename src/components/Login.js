@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import '../css/login.css'
+import { useHistory } from "react-router-dom";
 import { Form, Card, Button, Nav, Tab, Col} from 'react-bootstrap'
+import axios from 'axios'
 
 const Login = () => {
+    let history = useHistory();
+
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const [usernameLog, setUsernameLog] = useState("")
+    const [passwordLog, setPasswordLog] = useState("")
+
+    const user_registration = () =>{
+    
+        axios.post('http://localhost:3001/register', {
+            username: username,
+            email: email, 
+            pwd: password
+        }).then(()=>{
+            console.log("successfully send")
+        })
+    }
+
+    const user_log = (e) =>{
+        e.preventDefault();
+        axios.post('http://localhost:3001/login', {
+            usernameL: usernameLog, 
+            pwdL: passwordLog
+        }).then((res)=>{
+            history.push({
+                pathname: "/dashboard",
+                state: { user: res.data[0] }
+              });
+        })
+    }
+
+    useEffect(() => {
+    }, [])
+    
 
     return(
         <div className="container p-5">
@@ -22,17 +60,19 @@ const Login = () => {
                     <Tab.Pane eventKey="#log">
                         <div className="mt-4">
                         <Form>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Group className="mb-3">
+                            <Form.Label>username</Form.Label>
+                            <Form.Control type="text" placeholder="Enter username" 
+                            onChange={(e)=> {setUsernameLog(e.target.value)}}/>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" 
+                            onChange={(e)=> {setPasswordLog(e.target.value)}}/>
                         </Form.Group>
 
-                        <Button variant="success" type="submit">
+                        <Button variant="success" type="submit" onClick={user_log}>
                             Login
                         </Button>
                         </Form>
@@ -42,20 +82,23 @@ const Login = () => {
                     <div className="mt-4">
                         <Form>
                         <Form.Group className="mb-3">
-                            <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your name" />
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Enter your name" 
+                            onChange={(e)=> {setUsername(e.target.value)}}/>
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Group className="mb-3" controlId="formEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" 
+                            onChange={(e)=> {setEmail(e.target.value)}}/>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Group className="mb-3" controlId="formPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password"
+                            onChange={(e)=> {setPassword(e.target.value)}}/>
                         </Form.Group>
 
-                        <Button variant="success" type="submit">
+                        <Button variant="success" type="submit" onClick={user_registration}>
                             Register
                         </Button>
                         </Form>
@@ -66,7 +109,6 @@ const Login = () => {
                 </Card.Body>
             </Card>
             </Col>
-            
         </div>
     )
 }

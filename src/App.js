@@ -13,6 +13,7 @@ import Home from './components/Home'
 import Footer from './components/Footer'
 import Category from './components/Category'
 import Login from './components/Login'
+import Dashboard from './components/Dashboard'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/login">
                 <Login/>
               </Route>
+              <Route path="/dashboard" render={(props) => <Dashboard {...props}/>}/>
               <Route path="/search">
                 <Search/>
               </Route>
