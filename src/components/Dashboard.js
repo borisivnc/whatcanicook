@@ -8,8 +8,7 @@ const Dashboard = (props) => {
     const [user, setUser] = useState([])
 
     useEffect(() => {
-        if (localStorage.getItem('user') != null)
-        {
+        if (localStorage.getItem('user') != null) {
             setUser(JSON.parse(localStorage.getItem('user')))
         }
         else {

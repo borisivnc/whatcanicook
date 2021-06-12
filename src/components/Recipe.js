@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from "react-router-dom";
 import '../css/styles.css'
-import {Card, Row, Col, Image} from 'react-bootstrap'
+import {Card, Row, Col, Image, Button} from 'react-bootstrap'
 import axios from 'axios'
 
 const Recipe = () => {
@@ -16,13 +16,31 @@ const Recipe = () => {
         glutenFree: false
     })
     const blackBg = {background: 'black'}
+    const [bookmarked, setBookmarked] = useState(false)
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
-        var params = {
-        apiKey: '7f611fc7f9e34b598ca07d543eab276e'
+        if (localStorage.getItem('user') != null) {
+            let _user = JSON.parse(localStorage.getItem('user'))
+
+            if(user == null) {
+                setUser(_user)
+            }
+
+            axios.post('http://localhost:3001/isfavorite', {
+                id_recipe: id,
+                id_user: _user.iduser
+            }).then((res) => {
+                setBookmarked(res.data)
+            })
+        } else {
+            setUser(null)
         }
-        axios.get('https://api.spoonacular.com/recipes/' + id + '/information/', { params }).then(res => {
-            
+
+        var params = {
+            apiKey: 'a580fafc28554f4a9ac047dcd8325266'
+        }
+        axios.get('https://api.spoonacular.com/recipes/' + id + '/information/', { params }).then(res => { 
             setState({
                 title: res.data.title,
                 summary: res.data.summary,
@@ -35,7 +53,7 @@ const Recipe = () => {
                 instructions: res.data.instructions
             })
         })
-    }, [id])
+    }, [id, user])
 
     function imageSrc (id) {
         return 'https://spoonacular.com/recipeImages/' + id + '-240x150.jpg'
@@ -45,14 +63,34 @@ const Recipe = () => {
         return ' https://spoonacular.com/cdn/ingredients_100x100/' + image
     }
 
+    function onBookmarkClicked() {
+        setBookmarked(!bookmarked)
+        axios.post('http://localhost:3001/setfavorite', {
+            favorite: !bookmarked, 
+            id_user: 1,
+            id_recipe: id
+        }).then((res) => {})
+    }
+
     return (
         <div className="container mb-5">
         <div style={{height: '30px'}}></div>
         <Card style={blackBg} text='white' className="justify-center">
             <Card.Body>
-                <Card.Title>{state.title}</Card.Title>
+                <Row>
                 <Card.Text>
-                </Card.Text>
+                    <Row>
+                        <Col sm={11}>
+                            <span style={{fontSize: '25px'}}>{state.title}</span>
+                        </Col>
+                        <Col sm={1}>
+                            <Button className="ml-4" variant="dark" onClick={onBookmarkClicked}>
+                                {bookmarked? <i className="fas fa-bookmark"></i> : <i className="far fa-bookmark"></i>}
+                            </Button>
+                        </Col>
+                    </Row>
+                    
+                </Card.Text></Row>
             </Card.Body>
         </Card>
         <Card>

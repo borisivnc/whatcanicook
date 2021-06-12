@@ -10,16 +10,17 @@ const MainNavbar = () => {
     const history = useHistory();
     const [searchQuery, setSearchQuery] = useState('')
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState(null)
 
 
     useEffect(() => {
         if (localStorage.getItem('user') != null)
         {
-            setUser(JSON.parse(localStorage.getItem('user')))
+            if(user == null)
+                setUser(JSON.parse(localStorage.getItem('user')))
         }
         else {
-            setUser([])
+            setUser(null)
         }
 
     }, [user])
@@ -65,7 +66,7 @@ const MainNavbar = () => {
                     <Button onClick={handleSearch} variant="success">Search</Button>
                     </Form>
                 </Col>
-                {user.length !== 0 ?
+                {user !== null ?
                 [
                     <Col sm="2" className="text-right">
                         <Button variant="link" href="/dashboard" style={{color:'black'}}><i className="far fa-user-circle fa-lg"></i></Button>
