@@ -5,21 +5,22 @@ import axios from 'axios'
 
 const Dashboard = (props) => {
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         if (localStorage.getItem('user') != null) {
-            setUser(JSON.parse(localStorage.getItem('user')))
+            if(user == null)
+                setUser(JSON.parse(localStorage.getItem('user')))
         }
         else {
-            setUser([])
+            setUser(null)
         }
     }, [user])
     
     return(
         <>
             <h4>Dashboard page</h4>
-            <p>{user.username}</p>
+            <p>{user && user.username}</p>
         </>
     )
 }
