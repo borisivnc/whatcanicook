@@ -97,6 +97,17 @@ app.post('/isfavorite', function(req, res) {
     })
 });
 
+app.post('/getfavorites', function(req, res) {
+    const sqlSelect = "SELECT * FROM favorites WHERE id_user = ?"
+    const id_user = req.body.id_user
+
+    db.query(sqlSelect, [id_user], (err, result) => {
+        if(err != null)
+            res.send(err)
+        res.send(result)
+    })
+});
+
 app.listen(3001, () => {
     console.log("running on port 3001")
 })

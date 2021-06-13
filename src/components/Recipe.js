@@ -38,7 +38,7 @@ const Recipe = () => {
         }
 
         var params = {
-            apiKey: 'a580fafc28554f4a9ac047dcd8325266'
+            apiKey: '7f611fc7f9e34b598ca07d543eab276e'
         }
         axios.get('https://api.spoonacular.com/recipes/' + id + '/information/', { params }).then(res => { 
             setState({
@@ -152,7 +152,7 @@ const Recipe = () => {
                         )
                     }
                     <h3>Directions:</h3>
-                    <p>{state.instructions}</p>
+                    <div className="content" dangerouslySetInnerHTML={{__html: state.instructions}}></div>
                 </Card.Text>
             </Card.Body>
         </Card>
