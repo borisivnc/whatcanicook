@@ -40,7 +40,7 @@ const Category = () => {
         <div className="container">
             <Row>
                 <Col sm={{span:6, offset:3}}>
-                <h2 className="mt-4 text-uppercase">{name}</h2>
+                <h2 className="mt-4 text-uppercase text-center">{name}</h2>
                 {
                     results.map((result) =>
                         <RecipeCard title={result.title} src={imageSrc(result.id)} url={`/recipe/${result.id}`} />
