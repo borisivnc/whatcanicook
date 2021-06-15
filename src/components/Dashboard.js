@@ -4,39 +4,17 @@ import {Row, Col} from 'react-bootstrap'
 import axios from 'axios'
 import RecipeCard from './RecipeCard'
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
     const [user, setUser] = useState(null)
     const [favorites, setFavorites] = useState([])
     var loaded = false
 
     useEffect(() => {
-        if (localStorage.getItem('user') != null) {
+        if (localStorage.getItem('user') !== null) {
             let _user = JSON.parse(localStorage.getItem('user'));
             if(user == null)
                 setUser(_user)
-            /*axios.post('http://localhost:3001/getfavorites', {
-                id_user: _user.iduser
-            }).then((res) => {
-                var params = {
-                    apiKey: '7f611fc7f9e34b598ca07d543eab276e'
-                }
-                if(!loaded) {
-                    console.log(res.data)
-                    loaded = true
-                    res.data.forEach(fav => {
-                        axios.get('https://api.spoonacular.com/recipes/' + fav.id_recipe + '/information/', { params }).then(recipe => { 
-                            setFavorites(favorites => [...favorites, {
-                                id: fav.id_recipe,
-                                title: recipe.title
-                            }])
-                        })
-                    })
-                }
-                
-            })*/
-            
-            
         }
         else {
             setUser(null)

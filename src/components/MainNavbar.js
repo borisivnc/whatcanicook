@@ -9,27 +9,31 @@ const MainNavbar = () => {
 
     const history = useHistory();
     const [searchQuery, setSearchQuery] = useState('')
-
+    const [isUserLogged, setIsUserLogged] = useState(false);
+    
     const [user, setUser] = useState(null)
 
-
     useEffect(() => {
-        if (localStorage.getItem('user') != null)
+
+        if (localStorage.getItem('user') !== null)
         {
-            if(user == null)
-                setUser(JSON.parse(localStorage.getItem('user')))
+            setIsUserLogged(true)
+            if(user === null)
+                setUser(JSON.parse(localStorage.getItem('user')))  
         }
         else {
             setUser(null)
+            setIsUserLogged(false)
         }
 
-    }, [user])
 
-    const user_logout = (e) => {
-        e.preventDefault()
-        localStorage.removeItem('user')
+    }, [user, isUserLogged])
+
+    const user_logout = () => {
+        localStorage.clear()
+        setIsUserLogged(false)
         history.push({
-            pathname: "/login",
+            pathname: "/login"
         });
     }
 
@@ -66,14 +70,13 @@ const MainNavbar = () => {
                     <Button onClick={handleSearch} variant="success">Search</Button>
                     </Form>
                 </Col>
-                {user !== null ?
+                {isUserLogged?
                 [
                     <Col sm="2" className="text-right">
                         <Button variant="link" href="/dashboard" style={{color:'black'}}><i className="far fa-user-circle fa-lg"></i></Button>
                         <Button variant="link" style={{color:'black'}} onClick={user_logout}><i className="fas fa-sign-out-alt fa-lg"></i></Button>
                     </Col>
                 ]
-                
                 :
                     <Button variant="link" href="/login" style={{color:'black'}}><i className="fas fa-user fa-lg"></i></Button>
                 }

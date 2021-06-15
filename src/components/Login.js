@@ -27,20 +27,19 @@ const Login = () => {
     }
 
     const userLogin = (e) => {
-        e.preventDefault();
-
+        e.preventDefault()
         axios.post('http://localhost:3001/login', {
             username: usernameLogin, 
             pwd: passwordLogin
 
         }).then((res)=>{
-            history.push({
-                pathname: "/dashboard",
-                state: { user: res.data[0] }
-              });
             localStorage.setItem('user', JSON.stringify(res.data[0]))
+            history.push({
+                pathname: "/dashboard"
+              });
         })
     }
+
     
     return(
         <div className="container p-5">
